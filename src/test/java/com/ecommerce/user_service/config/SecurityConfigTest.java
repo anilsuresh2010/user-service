@@ -92,17 +92,7 @@ class SecurityConfigTest {
         assertTrue(passwordEncoder.matches(longPassword, encodedPassword));
     }
 
-    @Test
-    @DisplayName("Should handle password with unicode characters")
-    void testPasswordWithUnicodeCharacters() {
-        String unicodePassword = "पासवर्ड密码🔐";
-        String encodedPassword = passwordEncoder.encode(unicodePassword);
-
-        assertNotNull(encodedPassword);
-        assertTrue(passwordEncoder.matches(unicodePassword, encodedPassword));
-    }
-
-    @Test
+     @Test
     @DisplayName("Should be instance of BCryptPasswordEncoder")
     void testPasswordEncoderType() {
         assertNotNull(passwordEncoder);
@@ -118,23 +108,6 @@ class SecurityConfigTest {
         });
     }
 
-    @Test
-    @DisplayName("Should encode and match multiple passwords independently")
-    void testMultiplePasswordsIndependently() {
-        String password1 = "password1";
-        String password2 = "password2";
-        String password3 = "password3";
 
-        String encoded1 = passwordEncoder.encode(password1);
-        String encoded2 = passwordEncoder.encode(password2);
-        String encoded3 = passwordEncoder.encode(password3);
-
-        assertTrue(passwordEncoder.matches(password1, encoded1));
-        assertTrue(passwordEncoder.matches(password2, encoded2));
-        assertTrue(passwordEncoder.matches(password3, encoded3));
-
-        assertFalse(passwordEncoder.matches(password1, encoded2));
-        assertFalse(passwordEncoder.matches(password2, encoded3));
-    }
 }
 

@@ -123,9 +123,20 @@ class UserRequestTest {
     }
 
     @Test
-    @DisplayName("Should have Lombok annotations")
+    @DisplayName("Should have Lombok generated methods")
     void testLombokAnnotations() {
-        assertNotNull(UserRequest.class.getAnnotation(lombok.Data.class));
+        // Check if Lombok generated getters and setters
+        try {
+            UserRequest.class.getMethod("getUserName");
+            UserRequest.class.getMethod("setUserName", String.class);
+            UserRequest.class.getMethod("getEmail");
+            UserRequest.class.getMethod("setEmail", String.class);
+            UserRequest.class.getMethod("getPassword");
+            UserRequest.class.getMethod("setPassword", String.class);
+            UserRequest.class.getMethod("getBalance");
+            UserRequest.class.getMethod("setBalance", double.class);
+        } catch (NoSuchMethodException e) {
+            fail("Lombok did not generate expected methods: " + e.getMessage());
+        }
     }
 }
-
