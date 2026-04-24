@@ -1,5 +1,5 @@
 # Multi-stage Dockerfile for User Service
-FROM maven:3.9.4-openjdk-17 AS builder
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
 # Set working directory
 WORKDIR /app
